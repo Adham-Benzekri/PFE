@@ -1,36 +1,13 @@
-# data_cleaning.py
-
 import pandas as pd
 
 def clean_data(df):
-    """
-    Nettoyage des données : 
-    - mise en minuscules, suppression des doublons,
-    - correction des fautes dans colonnes catégorielles,
-    - conversion colonnes numériques,
-    - gestion des valeurs manquantes,
-    - réinitialisation de l'index.
-    
-    Paramètre:
-    df : pandas.DataFrame
-        Le DataFrame brut à nettoyer.
-        
-    Retour:
-    pandas.DataFrame
-        Le DataFrame nettoyé.
-    """
-
-    # Mettre toutes les valeurs de la colonne "Cause_arret" en minuscules
     df['Cause_arret'] = df['Cause_arret'].str.lower()
 
-    # Vérifier et supprimer les doublons
     df = df.drop_duplicates()
 
-    # Nettoyer les espaces et harmoniser la casse dans les colonnes catégorielles
     df['Cause_arret'] = df['Cause_arret'].str.strip().str.lower()
     df['Quart_de_travail'] = df['Quart_de_travail'].str.strip().str.lower()
 
-    # Correction manuelle des fautes courantes ou incohérences
     df['Cause_arret'] = df['Cause_arret'].replace({
         'maintenence': 'maintenance',
         'panne equipement': 'panne equipement',
@@ -54,12 +31,10 @@ def clean_data(df):
         'Temperature_C', 'Humidite_pct'
     ]
 
-    # Conversion des colonnes numériques en nombres
     for col in colonnes_numeriques:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors='coerce')
 
-    # Gestion des valeurs manquantes
     for col in colonnes_numeriques:
         if col in df.columns:
             median = df[col].median()
@@ -69,7 +44,7 @@ def clean_data(df):
         if col_cat in df.columns:
             df[col_cat] = df[col_cat].fillna('inconnu')
 
-    # Réinitialisation de l’index
+
     df = df.reset_index(drop=True)
 
     return df
