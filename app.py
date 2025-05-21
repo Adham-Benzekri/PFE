@@ -14,22 +14,23 @@ if uploaded_file:
     try:
         df = pd.read_csv(uploaded_file)
 
+        # Nettoyage
         df_cleaned = clean_data(df)
+        cleaned_path = "data_nettoye.csv"
+        df_cleaned.to_csv(cleaned_path, index=False)
 
         st.subheader("🧹 Aperçu des données nettoyées")
         st.dataframe(df_cleaned.head())
 
+        # Analyse
         st.subheader("📊 Résultats de l'analyse")
-        summary = analyze_downtime_impact(df_cleaned)
+        summary = analyze_downtime_impact(cleaned_path)
 
         if summary is not None:
             st.dataframe(summary)
 
-            csv = summary.to_csv(index=True).encode('utf-8')
-
+            csv = summary.to_csv(index=False).encode('utf-8')
             result_filename = 'resultat_analyse.csv'
-            with open(result_filename, 'wb') as f:
-                f.write(csv)
 
             st.download_button(
                 label="📤 Télécharger les résultats pour Power BI",
@@ -55,13 +56,17 @@ if uploaded_file:
                     unsafe_allow_html=True
                 )
 
-            with open("powerbitamplate.pbit", "rb") as f:
-                st.download_button(
-                    label="📥 Télécharger le modèle Power BI",
-                    data=f,
-                    file_name="powerbitamplate.pbit",
-                    mime="application/octet-stream"
-                )
+            # Téléchargement du modèle Power BI
+            if os.path.exists("powerbitamplate.pbit"):
+                with open("powerbitamplate.pbit", "rb") as f:
+                    st.download_button(
+                        label="📥 Télécharger le modèle Power BI",
+                        data=f,
+                        file_name="powerbitamplate.pbit",
+                        mime="application/octet-stream"
+                    )
+            else:
+                st.warning("Modèle Power BI introuvable dans le répertoire de l'application.")
 
         else:
             st.warning("Aucun résultat à afficher.")

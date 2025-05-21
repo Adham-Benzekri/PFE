@@ -2,7 +2,6 @@ import pandas as pd
 
 def clean_data(df):
     df['Cause_arret'] = df['Cause_arret'].str.lower()
-
     df = df.drop_duplicates()
 
     df['Cause_arret'] = df['Cause_arret'].str.strip().str.lower()
@@ -45,16 +44,14 @@ def clean_data(df):
             df[col_cat] = df[col_cat].fillna('inconnu')
 
     df = df.reset_index(drop=True)
-
     return df
 
-
-if __name__ == "__main__":
-    input_path = 'data.csv'
-    output_path = 'data_nettoye.csv'
-
+def clean_and_save(input_path='data.csv', output_path='data_nettoye.csv'):
     df = pd.read_csv(input_path)
     df_cleaned = clean_data(df)
     df_cleaned.to_csv(output_path, index=False)
-
     print(f"Données nettoyées enregistrées sous '{output_path}' avec succès.")
+    return output_path
+
+if __name__ == "__main__":
+    clean_and_save()
