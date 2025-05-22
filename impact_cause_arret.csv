@@ -1,0 +1,60 @@
+Mois,Cause_arret,Efficacite_moyenne (%),Impact_sur_efficacite (%)
+aout,panne electrique,14.91,2.01
+aout,retard matiere premiere,15.35,1.56
+aout,panne equipement,15.4,1.51
+aout,aucun,17.15,-0.24
+aout,maintenance,17.63,-0.71
+avril,panne equipement,14.18,2.73
+avril,panne electrique,14.81,2.11
+avril,maintenance,16.13,0.78
+avril,aucun,17.32,-0.41
+avril,retard matiere premiere,19.76,-2.85
+decembre,retard matiere premiere,14.53,2.38
+decembre,panne electrique,14.83,2.09
+decembre,panne equipement,15.66,1.25
+decembre,maintenance,16.3,0.61
+decembre,aucun,17.81,-0.9
+fevrier,maintenance,13.69,3.22
+fevrier,panne electrique,14.98,1.93
+fevrier,panne equipement,15.45,1.46
+fevrier,retard matiere premiere,16.26,0.65
+fevrier,aucun,17.74,-0.83
+janvier,retard matiere premiere,13.92,2.99
+janvier,panne equipement,14.26,2.66
+janvier,maintenance,15.52,1.39
+janvier,panne electrique,16.21,0.7
+janvier,aucun,17.55,-0.64
+juillet,maintenance,14.78,2.13
+juillet,panne electrique,14.86,2.05
+juillet,retard matiere premiere,16.07,0.85
+juillet,panne equipement,16.28,0.64
+juillet,aucun,17.41,-0.5
+juin,panne equipement,15.1,1.82
+juin,retard matiere premiere,15.92,1.0
+juin,maintenance,16.03,0.88
+juin,panne electrique,16.06,0.86
+juin,aucun,17.77,-0.86
+mai,retard matiere premiere,12.88,4.04
+mai,panne equipement,15.53,1.38
+mai,panne electrique,15.56,1.36
+mai,maintenance,16.04,0.88
+mai,aucun,17.81,-0.9
+mars,maintenance,14.47,2.44
+mars,panne equipement,14.59,2.32
+mars,panne electrique,14.9,2.02
+mars,retard matiere premiere,15.64,1.28
+mars,aucun,17.2,-0.29
+novembre,panne equipement,13.8,3.11
+novembre,panne electrique,15.83,1.08
+novembre,retard matiere premiere,17.07,-0.16
+novembre,aucun,17.73,-0.81
+octobre,panne electrique,14.35,2.57
+octobre,panne equipement,15.32,1.59
+octobre,retard matiere premiere,16.11,0.8
+octobre,maintenance,17.01,-0.1
+octobre,aucun,17.89,-0.98
+septembre,panne equipement,13.42,3.49
+septembre,panne electrique,14.79,2.12
+septembre,maintenance,15.16,1.75
+septembre,retard matiere premiere,16.18,0.73
+septembre,aucun,17.47,-0.56

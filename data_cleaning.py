@@ -46,6 +46,7 @@ def clean_data(df):
     df = df.reset_index(drop=True)
     return df
 
+# This function is for CLI use only
 def clean_and_save(input_path='data.csv', output_path='data_nettoye.csv'):
     df = pd.read_csv(input_path)
     df_cleaned = clean_data(df)
