@@ -1,7 +1,7 @@
 import pandas as pd
 
 def analyze_downtime_impact(data_path_or_df):
-    # Accept both path or DataFrame
+    # Accept both file path or DataFrame
     if isinstance(data_path_or_df, str):
         df = pd.read_csv(data_path_or_df)
     else:
@@ -28,10 +28,10 @@ def analyze_downtime_impact(data_path_or_df):
     summary = summary.sort_values(by=['Mois', 'Impact_sur_efficacite (%)'], ascending=[True, False])
     return summary
 
-# CLI testing only
-if __name__ == "__main__":
-    path = 'data_nettoye.csv'
-    result = analyze_downtime_impact(path)
-    result.to_csv('impact_cause_arret.csv', index=False)
-    print("Impact de chaque cause d'arrêt sur l'efficacité de production :")
-    print(result)
+# ❌ Disabled automatic CSV export
+# if __name__ == "__main__":
+#     path = 'data_nettoye.csv'
+#     result = analyze_downtime_impact(path)
+#     result.to_csv('impact_cause_arret.csv', index=False)
+#     print("Impact de chaque cause d'arrêt sur l'efficacité de production :")
+#     print(result)

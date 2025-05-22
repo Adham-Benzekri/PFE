@@ -16,60 +16,49 @@ if uploaded_file:
 
         # Nettoyage
         df_cleaned = clean_data(df)
-        cleaned_path = "data_nettoye.csv"
-        df_cleaned.to_csv(cleaned_path, index=False)
 
         st.subheader("🧹 Aperçu des données nettoyées")
         st.dataframe(df_cleaned.head())
 
         # Analyse
         st.subheader("📊 Résultats de l'analyse")
-        summary = analyze_downtime_impact(cleaned_path)
+        summary = analyze_downtime_impact(df_cleaned)
 
         if summary is not None:
             st.dataframe(summary)
 
-            csv = summary.to_csv(index=False).encode('utf-8')
-            result_filename = 'resultat_analyse.csv'
+            # Télécharger les données nettoyées
+            cleaned_csv = df_cleaned.to_csv(index=False).encode('utf-8')
+            st.download_button(
+                label="📥 Télécharger les données nettoyées",
+                data=cleaned_csv,
+                file_name="data_nettoye.csv",
+                mime="text/csv"
+            )
 
+            # Télécharger les résultats d'analyse
+            analysis_csv = summary.to_csv(index=False).encode('utf-8')
             st.download_button(
                 label="📤 Télécharger les résultats pour Power BI",
-                data=csv,
-                file_name=result_filename,
+                data=analysis_csv,
+                file_name="resultat_analyse.csv",
                 mime='text/csv'
             )
 
-            if st.button("📋 Copier le chemin du fichier résultat"):
-                abs_path = os.path.abspath(result_filename)
-                st.markdown(f"Chemin absolu du fichier résultat : `{abs_path}`")
-
-                st.markdown(
-                    f"""
-                    <script>
-                    navigator.clipboard.writeText("{abs_path}").then(function() {{
-                        alert('Chemin du fichier copié dans le presse-papier !');
-                    }}, function(err) {{
-                        alert('Échec de la copie : ' + err);
-                    }});
-                    </script>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-            # Téléchargement du modèle Power BI
-            if os.path.exists("powerbitamplate.pbit"):
-                with open("powerbitamplate.pbit", "rb") as f:
-                    st.download_button(
-                        label="📥 Télécharger le modèle Power BI",
-                        data=f,
-                        file_name="powerbitamplate.pbit",
-                        mime="application/octet-stream"
-                    )
-            else:
-                st.warning("Modèle Power BI introuvable dans le répertoire de l'application.")
-
         else:
             st.warning("Aucun résultat à afficher.")
+
+        # Téléchargement du modèle Power BI
+        if os.path.exists("powerbitamplate.pbit"):
+            with open("powerbitamplate.pbit", "rb") as f:
+                st.download_button(
+                    label="📥 Télécharger le modèle Power BI",
+                    data=f,
+                    file_name="powerbitamplate.pbit",
+                    mime="application/octet-stream"
+                )
+        else:
+            st.warning("Modèle Power BI introuvable dans le répertoire de l'application.")
 
     except Exception as e:
         st.error(f"❌ Une erreur est survenue lors du traitement du fichier : {e}")

@@ -46,13 +46,13 @@ def clean_data(df):
     df = df.reset_index(drop=True)
     return df
 
-# This function is for CLI use only
-def clean_and_save(input_path='data.csv', output_path='data_nettoye.csv'):
-    df = pd.read_csv(input_path)
-    df_cleaned = clean_data(df)
-    df_cleaned.to_csv(output_path, index=False)
-    print(f"Données nettoyées enregistrées sous '{output_path}' avec succès.")
-    return output_path
+# ❌ Disabled auto-execution
+# def clean_and_save(input_path='data.csv', output_path='data_nettoye.csv'):
+#     df = pd.read_csv(input_path)
+#     df_cleaned = clean_data(df)
+#     df_cleaned.to_csv(output_path, index=False)
+#     print(f"Données nettoyées enregistrées sous '{output_path}' avec succès.")
+#     return output_path
 
-if __name__ == "__main__":
-    clean_and_save()
+# if __name__ == "__main__":
+#     clean_and_save()
