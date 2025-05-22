@@ -1,11 +1,10 @@
 import pandas as pd
 
-def analyze_downtime_impact(data_path_or_df):
-    # Accept both file path or DataFrame
-    if isinstance(data_path_or_df, str):
-        df = pd.read_csv(data_path_or_df)
+def analyze_downtime_impact(data_path):
+    if isinstance(data_path, str):
+        df = pd.read_csv(data_path)
     else:
-        df = data_path_or_df.copy()
+        df = data_path.copy()
 
     if 'Mois' not in df.columns and 'Date' in df.columns:
         df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
@@ -27,11 +26,3 @@ def analyze_downtime_impact(data_path_or_df):
 
     summary = summary.sort_values(by=['Mois', 'Impact_sur_efficacite (%)'], ascending=[True, False])
     return summary
-
-# ❌ Disabled automatic CSV export
-# if __name__ == "__main__":
-#     path = 'data_nettoye.csv'
-#     result = analyze_downtime_impact(path)
-#     result.to_csv('impact_cause_arret.csv', index=False)
-#     print("Impact de chaque cause d'arrêt sur l'efficacité de production :")
-#     print(result)

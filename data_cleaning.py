@@ -43,16 +43,16 @@ def clean_data(df):
         if col_cat in df.columns:
             df[col_cat] = df[col_cat].fillna('inconnu')
 
+    # ✅ New logic: Sort 'mois' from décembre to janvier
+    if 'mois' in df.columns:
+        mois_order = [
+            'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
+            'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'
+        ]
+        mois_order_desc = mois_order[::-1]  # Reverse order
+        df['mois'] = df['mois'].str.strip().str.lower()
+        df['mois'] = pd.Categorical(df['mois'], categories=mois_order_desc, ordered=True)
+        df = df.sort_values('mois', ascending=True)
+
     df = df.reset_index(drop=True)
     return df
-
-# ❌ Disabled auto-execution
-# def clean_and_save(input_path='data.csv', output_path='data_nettoye.csv'):
-#     df = pd.read_csv(input_path)
-#     df_cleaned = clean_data(df)
-#     df_cleaned.to_csv(output_path, index=False)
-#     print(f"Données nettoyées enregistrées sous '{output_path}' avec succès.")
-#     return output_path
-
-# if __name__ == "__main__":
-#     clean_and_save()

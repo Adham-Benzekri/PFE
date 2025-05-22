@@ -49,12 +49,12 @@ if uploaded_file:
             st.warning("Aucun résultat à afficher.")
 
         # Téléchargement du modèle Power BI
-        if os.path.exists("powerbitamplate.pbit"):
-            with open("powerbitamplate.pbit", "rb") as f:
+        if os.path.exists("template.pbit"):
+            with open("template.pbit", "rb") as f:
                 st.download_button(
                     label="📥 Télécharger le modèle Power BI",
                     data=f,
-                    file_name="powerbitamplate.pbit",
+                    file_name="template.pbit",
                     mime="application/octet-stream"
                 )
         else:
