@@ -43,13 +43,12 @@ def clean_data(df):
         if col_cat in df.columns:
             df[col_cat] = df[col_cat].fillna('inconnu')
 
-    # ✅ New logic: Sort 'mois' from décembre to janvier
     if 'mois' in df.columns:
         mois_order = [
             'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
             'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'
         ]
-        mois_order_desc = mois_order[::-1]  # Reverse order
+        mois_order_desc = mois_order[::-1] 
         df['mois'] = df['mois'].str.strip().str.lower()
         df['mois'] = pd.Categorical(df['mois'], categories=mois_order_desc, ordered=True)
         df = df.sort_values('mois', ascending=True)

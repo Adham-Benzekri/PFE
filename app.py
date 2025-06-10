@@ -14,20 +14,18 @@ if uploaded_file:
     try:
         df = pd.read_csv(uploaded_file)
 
-        # Nettoyage
         df_cleaned = clean_data(df)
 
         st.subheader("🧹 Aperçu des données nettoyées")
         st.dataframe(df_cleaned.head())
 
-        # Analyse
+
         st.subheader("📊 Résultats de l'analyse")
         summary = analyze_downtime_impact(df_cleaned)
 
         if summary is not None:
             st.dataframe(summary)
 
-            # Télécharger les données nettoyées
             cleaned_csv = df_cleaned.to_csv(index=False).encode('utf-8')
             st.download_button(
                 label="📥 Télécharger les données nettoyées",
@@ -36,7 +34,6 @@ if uploaded_file:
                 mime="text/csv"
             )
 
-            # Télécharger les résultats d'analyse
             analysis_csv = summary.to_csv(index=False).encode('utf-8')
             st.download_button(
                 label="📤 Télécharger les résultats pour Power BI",
@@ -48,7 +45,6 @@ if uploaded_file:
         else:
             st.warning("Aucun résultat à afficher.")
 
-        # Téléchargement du modèle Power BI
         if os.path.exists("template.pbit"):
             with open("template.pbit", "rb") as f:
                 st.download_button(

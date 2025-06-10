@@ -4,7 +4,9 @@ def analyze_downtime_impact(df):
     df = df[df['Cause_arret'].str.lower() != 'inconnu']
 
     overall_avg = df['Efficacite'].mean()
+
     avg_per_group = df.groupby(['Mois', 'Cause_arret'])['Efficacite'].mean()
+
     impact = overall_avg - avg_per_group
 
     summary = pd.DataFrame({
