@@ -1,2 +1,2 @@
-pip install streamlit;
-streamlit run app.py;
+pip install streamlit; "sur cmd pour installer Streamlit"
+streamlit run app.py; "sur cmd pour lancer l'application"
